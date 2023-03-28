@@ -1,12 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Playfair+Display&display=swap');
 
-/* 
+#app {
+    background-color: rgb(149, 219, 219);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+#container {
+    position:relative;
+    width: 80%;
+    height: 80%;
+    margin: 20px auto;
+    padding: 30px;
+    align-content: center;
+    background-color:rgb(112, 173, 173);
+    font-family: "Libre Baskerville";
+}
 
-*/
+h1 {
+    position: relative;
+    color:navy;
+    font-size: 70px;
+    text-align: center; 
+    font-family: "Playfair Display";
+}
+
+li {
+    display: flex;
+    padding: 5px;
+}
+
+input {
+    position: relative;
+    width: 80%;
+    margin: 5px auto;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+#listElement {
+    width: 90%;
+    margin: 10px auto;
+    font-size: 25px;
+    color: navy;
+    justify-content: space-between;
+    background-color: rgba(173, 216, 254, 0.188);
+    border-radius: 5px;
+}
+
+i {
+    display: none !important;
+    font-size: 25px;
+    margin: 5px 15px 0px 15px;
+}
+
+li:hover > i {
+    display: block !important;
+}
