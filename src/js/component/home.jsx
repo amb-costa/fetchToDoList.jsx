@@ -1,11 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+
+//Constructor for whole list
+//Using same code for to-do list using react project
+//Updating it so it works with fetch
 
 //create your first component
 const Home = () => {
 	//textIn: string container for text written on input
 	//textStay: array container for recording elements on input
+  //userURL: page containing the to-do list
   let [textIn, setTextIn] = useState("");
   let [textStay, setTextStay] = useState([]);
+  let userURL = "https://assets.breatheco.de/apis/fake/todos/user/beinganidiot";
+
+  //main fetch: will GET data from user, so it can render it to the list
+  const gettingData = () => {
+    fetch(userURL)
+    .then(response => response.json())
+    .then(data=>setTextStay(data));
+  }
+  useEffect(gettingData,[]);
+
+  //puttingData: adding data to user, receiving said data in form of array
+  //just adding data, fetch will display it
+  const puttingData = (array) => {
+    fetch(userURL, {
+      method: "PUT",
+      headers :{"Content-Type": "application/json"},
+      body: JSON.stringify(array)
+    })
+    .then(response => response.json())
+    .then();
+  }
 
   //input receives text, submits when pressing enter
   //text concats to array container, erases value on input
@@ -23,16 +50,21 @@ const Home = () => {
             placeholder="What do you need to do?"
             value={textIn}
 			onKeyDown={(e)=> {if(e.key==="Enter") {
-				setTextStay(textStay.concat(textIn));
-				setTextIn("");}}}
+        let newArray = textStay.concat({label:textIn, done:false});
+        setTextStay(newArray);
+        puttingData(newArray);
+				setTextIn("")}}}
           ></input>
         </li>
 		{textStay.map((line, index) => (
-			<li key={line} id="listElement">{line}
-			<i className="fas fa-trash-alt" onClick={()=>
-			setTextStay(textStay.filter((i, current) => index!=current))}></i></li>
+			<li key={index} id="listElement">{line.label}
+			<i className="fas fa-trash-alt" onClick={()=>{
+        let newArray = textStay.filter((i, current) => index!=current);
+        setTextStay(newArray);
+        puttingData(newArray);}}></i></li>
 		  ))}
       </ul>
+    
 	  <h4 style={{fontSize:20, marginTop:50}}>{(textStay.length==0)?
 		"No tasks, add a task!" :
 		textStay.length + " items"
