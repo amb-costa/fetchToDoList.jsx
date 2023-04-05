@@ -14,13 +14,26 @@ const Home = () => {
   let [textStay, setTextStay] = useState([]);
   let userURL = "https://assets.breatheco.de/apis/fake/todos/user/beinganidiot";
 
+  const creatingUser = () => {
+    fetch(userURL, {
+      method: "POST",
+      headers: {"Content-Type" : "application/json"},
+      body: JSON.stringify([])
+    })
+    .then(response => response.json())
+    .then(data=>console.log(data))
+  }
+  useEffect(creatingUser,[])
+
   //main fetch: will GET data from user, so it can render it to the list
   const gettingData = () => {
-    fetch(userURL)
+    fetch(userURL, {
+      headers: {"Content-Type" : "application/json"}
+    })
     .then(response => response.json())
-    .then(data=>setTextStay(data));
-  }
-  useEffect(gettingData,[]);
+    .then(data => console.log(data));
+  } 
+  useEffect(gettingData,[])
 
   //puttingData: adding data to user, receiving said data in form of array
   //just adding data, fetch will display it
@@ -31,7 +44,17 @@ const Home = () => {
       body: JSON.stringify(array)
     })
     .then(response => response.json())
-    .then();
+    .then(data=>console.log(data));
+  }
+
+  const deletingData = () => {
+    fetch(userURL, {
+      method:"DELETE",
+      headers :{"Content-Type": "application/json"},
+      body: []
+    })
+    .then(response => response.json())
+    .then(data=>console.log(data));
   }
 
   //input receives text, submits when pressing enter
@@ -61,7 +84,7 @@ const Home = () => {
 			<i className="fas fa-trash-alt" onClick={()=>{
         let newArray = textStay.filter((i, current) => index!=current);
         setTextStay(newArray);
-        puttingData(newArray);}}></i></li>
+        {newArray.length==0? deletingData(): puttingData(textStay)}}}></i></li>
 		  ))}
       </ul>
     
