@@ -35,8 +35,7 @@ li {
 input {
     position: relative;
     width: 80%;
-    margin: 5px auto;
-    padding: 8px;
+    padding: 10px;
     border-radius: 5px;
     font-size: 30px;
 }
@@ -59,4 +58,11 @@ i {
 
 li:hover > i {
     display: block !important;
+}
+
+button {
+    margin: 0px auto;
+    border-radius: 5px;
+    padding: 0px 20px;
+    font-size: 15px;
 }
