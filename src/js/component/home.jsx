@@ -18,6 +18,7 @@ const Home = () => {
   //reloads page so user is settled before building list
   const creatingUser = () => {
     fetch(userURL, {
+      mode: "no-cors",
       method: "POST",
       headers: {"Content-Type" : "application/json"},
       body: JSON.stringify([])
@@ -32,6 +33,7 @@ const Home = () => {
   //if there's no user, will call creatingUser to create it
   const gettingData = () => {
     fetch(userURL, {
+      mode: "no-cors",
       headers: {"Content-Type" : "application/json"}
     })
     .then(response => response.json())
